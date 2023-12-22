@@ -64,8 +64,8 @@ const App: React.FC = () => {
     const weightConversionFactor = calcUnits === 'ftlbs' ? 2.2 : 1;
     const heightConversionFactor = calcUnits === 'ftlbs' ? 3.28 : 1;
 
-    const weight = +enteredWeight * weightConversionFactor;
-    const height = +enteredHeight * heightConversionFactor;
+    const weight = +enteredWeight / weightConversionFactor;
+    const height = +enteredHeight / heightConversionFactor;
 
     const bmi = +weight / (+height) ** 2;
 
