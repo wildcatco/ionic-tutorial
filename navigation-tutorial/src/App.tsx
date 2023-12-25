@@ -38,48 +38,26 @@ import '@ionic/react/css/text-transformation.css';
 /* Theme variables */
 import './theme/theme.css';
 import './theme/variables.css';
+import SideDrawer from './components/SideDrawer';
+import CoursesContextProvider from './data/CoursesContextProvider';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonMenu contentId='main'>
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Course Goals</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent>
-          <IonList>
-            <IonMenuToggle>
-              <IonItem
-                button
-                routerLink='/courses/all-goals'
-                routerDirection='none'
-              >
-                <IonIcon slot='start' icon={list} />
-                <IonLabel>All Goals</IonLabel>
-              </IonItem>
-            </IonMenuToggle>
-            <IonMenuToggle>
-              <IonItem button routerLink='/filter' routerDirection='none'>
-                <IonIcon slot='start' icon={options} />
-                <IonLabel>Filter</IonLabel>
-              </IonItem>
-            </IonMenuToggle>
-          </IonList>
-        </IonContent>
-      </IonMenu>
-      <IonRouterOutlet id='main'>
-        <Route path='/filter'>
-          <Filter />
-        </Route>
-        <Route path='/courses'>
-          <CourseTabs />
-        </Route>
-        <Redirect path='/' to='/courses/list' exact />
-      </IonRouterOutlet>
+      <SideDrawer />
+      <CoursesContextProvider>
+        <IonRouterOutlet id='main'>
+          <Route path='/filter'>
+            <Filter />
+          </Route>
+          <Route path='/courses'>
+            <CourseTabs />
+          </Route>
+          <Redirect path='/' to='/courses' exact />
+        </IonRouterOutlet>
+      </CoursesContextProvider>
     </IonReactRouter>
   </IonApp>
 );

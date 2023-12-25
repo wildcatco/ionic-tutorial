@@ -1,15 +1,22 @@
 import {
-  IonBackButton,
   IonButtons,
   IonContent,
   IonHeader,
+  IonItem,
+  IonLabel,
+  IonList,
   IonMenuButton,
   IonPage,
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
+import { COURSE_DATA } from './Courses';
 
 const AllGoals: React.FC = () => {
+  const goals = COURSE_DATA.flatMap((course) =>
+    course.goals.map((goal) => ({ ...goal, courseTitle: course.title }))
+  );
+
   return (
     <IonPage>
       <IonHeader>
@@ -20,7 +27,18 @@ const AllGoals: React.FC = () => {
           <IonTitle>All Goals</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>all goals page!</IonContent>
+      <IonContent>
+        <IonList>
+          {goals.map((goal) => (
+            <IonItem key={goal.id}>
+              <IonLabel>
+                <h2>{goal.text}</h2>
+                <p>{goal.courseTitle}</p>
+              </IonLabel>
+            </IonItem>
+          ))}
+        </IonList>
+      </IonContent>
     </IonPage>
   );
 };
