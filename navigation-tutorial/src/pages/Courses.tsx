@@ -25,36 +25,6 @@ import AddCourseModal from '../components/AddCourseModal';
 import CourseItem from '../components/CourseItem';
 import CoursesContext from '../data/courses-context';
 
-export const COURSE_DATA = [
-  {
-    id: 'c1',
-    title: 'Ionic + React - The Practical Guid',
-    enrolled: new Date('03/22/2019'),
-    goals: [
-      { id: 'c1g1', text: 'Finish the course!' },
-      { id: 'c1g2', text: 'Learn a lot!' },
-    ],
-  },
-  {
-    id: 'c2',
-    title: 'React.js - The Complete Guide',
-    enrolled: new Date('03/24/2019'),
-    goals: [
-      { id: 'c2g1', text: 'Finish the course!' },
-      { id: 'c2g2', text: 'Learn a lot!' },
-    ],
-  },
-  {
-    id: 'c3',
-    title: 'Javascript - The Complete Guide',
-    enrolled: new Date('03/30/2019'),
-    goals: [
-      { id: 'c3g1', text: 'Finish the course!' },
-      { id: 'c3g2', text: 'Learn a lot!' },
-    ],
-  },
-];
-
 const Courses: React.FC = () => {
   const [isAdding, setIsAdding] = useState(false);
 

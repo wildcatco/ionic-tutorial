@@ -10,12 +10,16 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
-import { COURSE_DATA } from './Courses';
+import { useContext } from 'react';
+import CoursesContext from '../data/courses-context';
 
 const AllGoals: React.FC = () => {
-  const goals = COURSE_DATA.flatMap((course) =>
-    course.goals.map((goal) => ({ ...goal, courseTitle: course.title }))
-  );
+  const coursesCtx = useContext(CoursesContext);
+  const goals = coursesCtx.courses
+    .filter((course) => course.included)
+    .flatMap((course) =>
+      course.goals.map((goal) => ({ ...goal, courseTitle: course.title }))
+    );
 
   return (
     <IonPage>
@@ -28,16 +32,21 @@ const AllGoals: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonList>
-          {goals.map((goal) => (
-            <IonItem key={goal.id}>
-              <IonLabel>
-                <h2>{goal.text}</h2>
-                <p>{goal.courseTitle}</p>
-              </IonLabel>
-            </IonItem>
-          ))}
-        </IonList>
+        {goals.length === 0 && (
+          <h2 className='ion-text-center'>No goals found!</h2>
+        )}
+        {goals.length > 0 && (
+          <IonList>
+            {goals.map((goal) => (
+              <IonItem key={goal.id}>
+                <IonLabel>
+                  <h2>{goal.text}</h2>
+                  <p>{goal.courseTitle}</p>
+                </IonLabel>
+              </IonItem>
+            ))}
+          </IonList>
+        )}
       </IonContent>
     </IonPage>
   );

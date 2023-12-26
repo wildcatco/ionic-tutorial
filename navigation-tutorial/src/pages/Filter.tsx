@@ -10,11 +10,14 @@ import {
   IonToggle,
   IonToolbar,
 } from '@ionic/react';
-import { COURSE_DATA } from './Courses';
+import { useContext } from 'react';
+import CoursesContext from '../data/courses-context';
 
 const Filter: React.FC = () => {
+  const coursesCtx = useContext(CoursesContext);
+
   const courseFilterChangeHandler = (event: CustomEvent) => {
-    console.log(event);
+    coursesCtx.changeCourseFilter(event.detail.value, event.detail.checked);
   };
 
   return (
@@ -29,11 +32,12 @@ const Filter: React.FC = () => {
       </IonHeader>
       <IonContent>
         <IonList>
-          {COURSE_DATA.map((course) => (
+          {coursesCtx.courses.map((course) => (
             <IonItem key={course.id}>
               <IonToggle
                 value={course.id}
                 onIonChange={courseFilterChangeHandler}
+                checked={course.included}
               >
                 {course.title}
               </IonToggle>
