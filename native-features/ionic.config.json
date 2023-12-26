@@ -1,0 +1,7 @@
+{
+  "name": "Native Features",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
