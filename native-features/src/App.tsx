@@ -34,6 +34,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import './theme/theme.css';
+import MemoriesContextProvider from './data/MemoriesContextProvider';
 
 setupIonicReact();
 
@@ -42,16 +43,18 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path='/good-memories'>
-            <GoodMemories />
-          </Route>
-          <Route path='/bad-memories'>
-            <BadMemories />
-          </Route>
-          <Route path='/new-memory'>
-            <NewMemory />
-          </Route>
-          <Redirect to='/good-memories' />
+          <MemoriesContextProvider>
+            <Route path='/good-memories'>
+              <GoodMemories />
+            </Route>
+            <Route path='/bad-memories'>
+              <BadMemories />
+            </Route>
+            <Route path='/new-memory'>
+              <NewMemory />
+            </Route>
+            <Redirect to='/good-memories' />
+          </MemoriesContextProvider>
         </IonRouterOutlet>
         <IonTabBar slot='bottom'>
           <IonTabButton href='/good-memories' tab='good'>
